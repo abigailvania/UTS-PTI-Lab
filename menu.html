@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styleMenu.css">
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+      <a class="navbar-brand" href="#"><img src="money.png" alt="Logo" style="width: 50px; height: 50px;"></a>
+      <div class="menu-user" id="userInfo"></div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('main')">Main</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('income')">Income</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('outcome')">Outcome</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('reminders')">Reminders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('addReminderSection')">Add Reminder</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('about')">About Us</a>
+          </li>
+        </ul>
+        <span id="current-time" class="navbar-text mr-3"></span>
+      </div>      
+    </nav>
+  </header>
+  
+  <section id="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="mainDiv">
+                        <p class="balance">Balance</p>
+                        <p class="rp">Rp</p>
+                    <div id="total"></div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <div class="mainDiv">
+                    <div class="transaction">
+                        <p>Transaction</p>
+                    </div>
+                    <div id="totalTransaction"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+<section id="income" style="display:none;">
+        <div id="incomeDiv">
+            <div id="titleIncome"></div>
+            <form id="incomeForm">
+                <div class="mb-3">
+                    <label for="transactionNameIncome" class="form-label">Transaction Name</label>
+                    <input type="text" class="form-control" id="transactionNameIncome">
+                </div>
+                <div class="mb-3">
+                    <label for="transactionNominalIncome" class="form-label">Transaction Nominal</label>
+                    <input type="number" class="form-control" id="transactionNominalIncome">
+                </div>
+                <div class="mb-3">
+                    <label for="transactionTypeIncome" class="form-label">Transaction Type</label>
+                    <div class="dropdown" id="transactionTypeIn">
+                        <select class="form-select" id="transactionTypeIncome">
+                            <option selected disabled></option>
+                            <option value="makan">Foods</option>
+                            <option value="main">Entertainment</option>
+                            <option value="edukasi">Education</option>
+                            <option value="belanja">Shopping</option>
+                            <option value="lainnya">Others</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger submitButtonIncome" onclick="submitIncome()">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="outcome" style="display:none;">
+        <div id="outcomeDiv">
+            <div id="titleOutcome"></div>
+            <form id="outcomeForm">
+                <div class="mb-3">
+                    <label for="transactionNameOutcome" class="form-label">Transaction Name</label>
+                    <input type="text" class="form-control" id="transactionNameOutcome">
+                </div>
+                <div class="mb-3">
+                    <label for="transactionNominalOutcome" class="form-label">Transaction Nominal</label>
+                    <input type="number" class="form-control" id="transactionNominalOutcome">
+                </div>
+                <div class="mb-3">
+                    <label for="transactionTypeOutcome" class="form-label">Transaction Type</label>
+                    <div class="dropdown" id="transactionTypeOut">
+                        <select class="form-select" id="transactionTypeOutcome">
+                            <option selected disabled></option>
+                            <option value="makan">Foods</option>
+                            <option value="main">Entertainment</option>
+                            <option value="edukasi">Education</option>
+                            <option value="belanja">Shopping</option>
+                            <option value="lainnya">Others</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger submitButtonOutcome" onclick="submitOutcome()">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="reminders" style="display:none;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>Notifications and Reminders</h2>
+            <ul id="remindersList"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="addReminderSection" style="display:none;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <form id="addReminderForm">
+              <div class="mb-3">
+                <label for="reminderDescription" class="form-label" style="margin-top: 20px;">Description</label>
+                <input type="text" class="form-control" id="reminderDescription">
+              </div>
+              <div class="mb-3">
+                <label for="reminderAmount" class="form-label">Amount</label>
+                <input type="text" class="form-control" id="reminderAmount">
+              </div>
+              <div class="mb-3">
+                <label for="reminderDate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="reminderDate">
+              </div>
+              <button type="submit" class="btn btn-reminder">Add Reminder</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  <section id="about" style="display:none;">
+    <img src="gambar1.png" alt="About Us" class="about-image">
+    <div class="about-content">
+      <div class="gallery">
+        <figure>
+            <img src="agnes.jpg" alt="Anggota 1">
+            <figcaption>Agnes Devita Widjaja - @agnesdevita01<br>Web aja yang di hosting, aku jangan di ghosting.</figcaption>
+        </figure>
+        <figure>
+            <img src="abigail.jpg" alt="Anggota 2">
+            <figcaption>Abigail Vania Prasetio - @abigaiilvania<br>It's good to take the mask off once in a while, even just for one night.</figcaption>
+        </figure>
+        <figure>
+            <img src="alya.jpg" alt="Anggota 3">
+            <figcaption>Alya Azzahra - @alyazzahrra<br>Sukses hanya untuk yang layak dan berani.</figcaption>
+        </figure>
+        <figure>
+          <img src="livia.jpg" alt="Anggota 4">
+          <figcaption>Livia Junike - @junikxz<br>“When the righteous cry for help, the Lord hears, and rescues them from all their troubles.”<br>- Psalm 34:17.</figcaption>
+      </figure>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+  <script>        
+    function clearIncome() {
+        $("#transactionNameIncome").val('');
+        $("#transactionNominalIncome").val('');
+        $("#transactionTypeIncome").val('');
+    }
+
+    function clearOutcome() {
+        $("#transactionNameOutcome").val('');
+        $("#transactionNominalOutcome").val('');
+        $("#transactionTypeOutcome").val('');
+    }
+
+    $("#incomeForm").submit(function(event) {
+        clearIncome();
+    });
+
+    $("#outcomeForm").submit(function(event) {
+        clearOutcome();
+    });
+</script>
+</body>
+</html>
